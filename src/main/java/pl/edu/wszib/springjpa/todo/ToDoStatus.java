@@ -1,4 +1,4 @@
-package pl.edu.wszib.springjpa.model;
+package pl.edu.wszib.springjpa.todo;
 
 public enum ToDoStatus {
   NEW,

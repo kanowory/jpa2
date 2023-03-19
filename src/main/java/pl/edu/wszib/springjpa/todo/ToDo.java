@@ -1,15 +1,23 @@
-package pl.edu.wszib.springjpa.model;
+package pl.edu.wszib.springjpa.todo;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import java.time.Instant;
-
+@Entity
 public class ToDo {
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String zadanie;
+  @Enumerated(EnumType.STRING)
   private ToDoStatus status;
   private Instant termin;
+  @CreationTimestamp
   private Instant createdAt;
+  @UpdateTimestamp
   private Instant updatedAt;
 
   public Integer getId() {
