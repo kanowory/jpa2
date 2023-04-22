@@ -1,21 +1,42 @@
-package pl.edu.wszib.springjpa.model;
+package pl.edu.wszib.springjpa.cv;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import java.time.Instant;
-
+@Entity
 public class Praca {
-  private long id;
+  @Id
+  @GeneratedValue
+  private Integer id;
   private String nazwaFirmy;
   private String pracaOd;
   private String pracaDo;
   private String stanowisko;
+
+  @ManyToOne
+  @JoinColumn
+  private CV cv;
+
+  @CreationTimestamp
   private Instant createdAt;
+  @UpdateTimestamp
   private Instant updatedAt;
 
-  public long getId() {
+  public CV getCv() {
+    return cv;
+  }
+
+  public void setCv(CV cv) {
+    this.cv = cv;
+  }
+
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

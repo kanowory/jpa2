@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+/*@RestController
 @RequestMapping("/praca")
 public class PracaController {
 
@@ -44,4 +44,4 @@ public class PracaController {
         repository.deleteById(id);
     }
 
-}
+}*/

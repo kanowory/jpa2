@@ -1,0 +1,95 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Edytuj CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <form method="post" th:action="@{/moje-cv/edytuj/{id} (id=${cv.id})}" th:object="${cv}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="form-label" for="imie">Imie</label>
+            <input class="form-control" id="imie" type="text" th:field="*{imie}">
+        </div >
+        <div class="form-group">
+            <label class="form-label" for="nazwisko">Nazwisko</label>
+            <input class="form-control" id="nazwisko" type="text" th:field="*{nazwisko}">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="dataUrodzenia">Data urodzenia</label>
+            <input class="form-control" id="dataUrodzenia" type="date" th:field="*{dataUrodzenia}">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="obraz">Data urodzenia</label>
+            <input class="form-control" id="obraz" type="file" name="obraz" accept="image/*">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Zmien">
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Nazwa</td>
+            <td>Rodzaj</td>
+            <td>Stopien</td>
+            <td>Akcje</td>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form method="post" th:action="@{/moje-cv/edytuj/{id}/kompetencja (id=${cv.id})}" th:object="${nowaKompetencja}">
+                    <td><input class="form-control" type="text" th:field="*{nazwa}"></td>
+                    <td>
+                        <select class="form-control" th:field="*{rodzaj}">
+                            <option th:each="r: ${rodzaje}" th:value="${r}" th:text="${r}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" min="1" max="10" step="1" th:field="*{stopien}">
+                    </td>
+                    <td>
+                        <input class="btn btn-primary" type="submit" value="Dodaj">
+                    </td>
+                </form>
+            </tr>
+        <tr th:each="kompetencja : ${cv.kompetencje}">
+            <td th:text="${kompetencja.nazwa}"></td>
+            <td th:text="${kompetencja.rodzaj}"></td>
+            <td th:text="${kompetencja.stopien}"></td>
+            <td><a th:href="@{/moje-cv/edytuj/{cvId}/kompetencja/{id}/usun (cvId = ${cv.id}, id=${kompetencja.id})}" class="btn btn-danger">Usun </a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Nazwa firmy</td>
+            <td>Stanowisko</td>
+            <td>Praca od</td>
+            <td>Praca do</td>
+            <td>Akcje</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <form method="post" th:action="@{/moje-cv/edytuj/{id}/praca (id=${cv.id})}" th:object="${nowaPraca}">
+                <td><input class="form-control" type="text" th:field="*{nazwaFirmy}"></td>
+                <td><input class="form-control" type="text" th:field="*{stanowisko}"></td>
+                <td><input class="form-control" type="date" th:field="*{pracaOd}"></td>
+                <td><input class="form-control" type="date" th:field="*{pracaDo}"></td>
+                <td><input class="btn btn-primary" type="submit" value="Dodaj"></td>
+            </form>
+        </tr>
+        <tr th:each="praca : ${cv.doswiadczenie}">
+            <td th:text="${praca.nazwaFirmy}"></td>
+            <td th:text="${praca.stanowisko}"></td>
+            <td th:text="${praca.pracaOd}"></td>
+            <td th:text="${praca.pracaDo}"></td>
+            <td><a th:href="@{/moje-cv/edytuj/{cvId}/praca/{id}/usun (cvId = ${cv.id}, id=${praca.id})}" class="btn btn-danger">Usun </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

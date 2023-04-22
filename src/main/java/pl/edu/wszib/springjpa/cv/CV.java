@@ -1,20 +1,28 @@
-package pl.edu.wszib.springjpa.model;
+package pl.edu.wszib.springjpa.cv;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
-
+@Entity
 public class CV {
-
+  @Id
+  @GeneratedValue
   private Integer id;
   private String imie;
   private String nazwisko;
-  private Instant dataUrodzenia;
+  private String dataUrodzenia;
+  @Lob
   private byte[] zdjecie;
+  @OneToMany(mappedBy = "cv")
   private List<Praca> doswiadczenie;
+  @OneToMany(mappedBy = "cv")
   private List<Kompetencja> kompetencje;
+  @CreationTimestamp
   private Instant createdAt;
+  @UpdateTimestamp
   private Instant updatedAt;
 
   public Integer getId() {
@@ -41,11 +49,11 @@ public class CV {
     this.nazwisko = nazwisko;
   }
 
-  public Instant getDataUrodzenia() {
+  public String getDataUrodzenia() {
     return dataUrodzenia;
   }
 
-  public void setDataUrodzenia(Instant dataUrodzenia) {
+  public void setDataUrodzenia(String dataUrodzenia) {
     this.dataUrodzenia = dataUrodzenia;
   }
 

@@ -1,12 +1,8 @@
-package pl.edu.wszib.springjpa.praca;
+package pl.edu.wszib.springjpa.cv;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-/*
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface PracaRepository extends JpaRepository<Praca, Integer> {
-
-    List<Praca> findAllByStanowisko(String stanowisko);
 }
-*/

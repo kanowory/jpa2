@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Moje CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+   <div class="row">
+       <a th:href="@{/moje-cv/dodaj}" class="btn btn-primary">DODAJ CV</a>
+   </div>
+    <div class="row" th:each="cv : ${cvs}">
+        <div class="col-4">
+            <img class="image-fluid rounded" th:src="@{/moje-cv/obrazek/{id} (id=${cv.id})}">
+        </div>
+        <div class="col-7">
+            <h1>
+                <span th:text="${cv.imie}"></span>
+                <span th:text="${cv.nazwisko}"></span>
+            </h1>
+        </div>
+        <div class="col-1">
+            <a th:href="@{/moje-cv/widok/{id} (id=${cv.id})}" class="btn btn-primary">Otworz</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
